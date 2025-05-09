@@ -2,11 +2,13 @@
 
 
 const express = require("express");
+const companiesRoutes = require("./routes/companies");
 
 const app = express();
 const ExpressError = require("./expressError")
 
 app.use(express.json());
+app.use("/companies", companiesRoutes);
 
 
 /** 404 handler */
@@ -26,6 +28,12 @@ app.use((err, req, res, next) => {
     message: err.message
   });
 });
+
+
+app.get('/', (req, res) => {
+  res.send("Welcome to Biztime!");
+});
+
 
 
 module.exports = app;
